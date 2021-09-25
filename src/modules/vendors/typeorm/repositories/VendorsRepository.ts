@@ -20,4 +20,3 @@ class VendorsRepository extends Repository<Vendor> {
     return vendor;
   }
 }
-export default VendorsRepository;

@@ -24,13 +24,12 @@ export default class VendorsController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, birth, cellphone, area } = request.body;
+    const { name, cellphone, area } = request.body;
 
     const createVendor = new CreateVendorService();
 
     const vendor = await createVendor.execute({
       name,
-      birth,
       cellphone,
       area,
     });
@@ -39,7 +38,7 @@ export default class VendorsController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, birth, cellphone, area } = request.body;
+    const { name, cellphone, area } = request.body;
     const { id } = request.params;
 
     const updateVendor = new UpdateVendorService();
@@ -47,7 +46,6 @@ export default class VendorsController {
     const vendor = await updateVendor.execute({
       id,
       name,
-      birth,
       cellphone,
       area,
     });

@@ -11,9 +11,9 @@ interface IRequest {
 class CreateVendorService {
   public async execute({ name, cellphone, area }: IRequest): Promise<Vendor> {
     const vendorsRepository = getCustomRepository(VendorsRepository);
-    const nameExists = await vendorsRepository.findByName(name);
+    const vendorExists = await vendorsRepository.findByName(name);
 
-    if (nameExists) {
+    if (vendorExists) {
       throw new AppError(
         'Nome já existe, adicione algo que possa diferenciá-los',
       );
