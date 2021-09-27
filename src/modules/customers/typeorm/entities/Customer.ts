@@ -27,7 +27,7 @@ class Customer {
   celular: string;
 
   @Column()
-  endereço: string;
+  endereco: string;
 
   @CreateDateColumn()
   created_at: Date;
