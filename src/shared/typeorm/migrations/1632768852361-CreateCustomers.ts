@@ -2,10 +2,9 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 /*
       name,
-      email,
-      password,
-      nickname,
-      occupation,
+      cpf,
+      celular,
+      endereco
       */
 export class CreateUsers1632768852361 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

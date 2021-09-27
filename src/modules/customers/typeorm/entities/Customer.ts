@@ -29,9 +29,6 @@ class Customer {
   @Column()
   endereço: string;
 
-  @Column()
-  occupation: string;
-
   @CreateDateColumn()
   created_at: Date;
 
@@ -39,4 +36,4 @@ class Customer {
   updated_at: Date;
 }
 
-export default User;
+export default Customer;
