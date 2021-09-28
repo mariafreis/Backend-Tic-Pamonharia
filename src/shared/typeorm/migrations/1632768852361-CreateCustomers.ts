@@ -1,9 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-/*
-      name,
+/*  name,
       cpf,
-      celular,
+      celular
       endereco
       */
 export class CreateUsers1632768852361 implements MigrationInterface {
@@ -33,9 +32,8 @@ export class CreateUsers1632768852361 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'endereço',
+            name: 'endereco',
             type: 'varchar',
-            isNullable: true,
           },
           {
             name: 'created_at',

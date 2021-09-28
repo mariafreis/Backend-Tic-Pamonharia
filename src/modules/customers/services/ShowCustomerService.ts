@@ -1,13 +1,14 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import CustomersRepository from '../repositories/CustomersRepository';
+import Customer from '../typeorm/entities/Customer';
+import CustomersRepository from '../typeorm/repositories/CustomersRepository';
 
 interface IRequest {
   id: string;
 }
 
-class DeleteCustomerService {
-  public async execute({ id }: IRequest): Promise<void> {
+class ShowCustomerService {
+  public async execute({ id }: IRequest): Promise<Customer> {
     const customersRepository = getCustomRepository(CustomersRepository);
 
     const customer = await customersRepository.findOne(id);
@@ -15,8 +16,9 @@ class DeleteCustomerService {
     if (!customer) {
       throw new AppError('Cliente não existe.');
     }
-    await customersRepository.remove(customer);
+
+    return customer;
   }
 }
 
-export default DeleteCustomerService;
+export default ShowCustomerService;

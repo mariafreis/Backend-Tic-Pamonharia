@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-/*
-      name,
-      cellphone,
-      area,
+/*  name,
+      cpf,
+      celular
+      endereco
       */
-export class CreateVendors16325100771467 implements MigrationInterface {
+export class CreateVendors1632799456193 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
