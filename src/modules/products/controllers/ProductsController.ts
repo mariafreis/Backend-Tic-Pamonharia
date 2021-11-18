@@ -15,11 +15,11 @@ export default class ProductsController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { name } = request.params;
 
     const showProduct = new ShowProductService();
 
-    const product = await showProduct.execute({ id });
+    const product = await showProduct.execute({ name });
     return response.json(product);
   }
 
@@ -40,7 +40,7 @@ export default class ProductsController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, description, pricecomp, pricevend, quantity } = request.body;
+    const { name, description, quantity, pricecomp, pricevend } = request.body;
     const { id } = request.params;
 
     const updateProduct = new UpdateProductService();
@@ -49,9 +49,9 @@ export default class ProductsController {
       id,
       name,
       description,
+      quantity,
       pricecomp,
       pricevend,
-      quantity,
     });
 
     return response.json(product);

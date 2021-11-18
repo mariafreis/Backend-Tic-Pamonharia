@@ -4,14 +4,14 @@ import Product from '../typeorm/entities/Product';
 import ProductRepository from '../typeorm/repositories/ProductRepository';
 
 interface IRequest {
-  id: string;
+  name: string;
 }
 
 class ShowProductService {
-  public async execute({ id }: IRequest): Promise<Product> {
+  public async execute({ name }: IRequest): Promise<Product> {
     const productsRepository = getCustomRepository(ProductRepository);
 
-    const product = await productsRepository.findOne(id);
+    const product = await productsRepository.findByName(name);
 
     if (!product) {
       throw new AppError('Produto não existe.');

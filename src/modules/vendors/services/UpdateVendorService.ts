@@ -22,13 +22,13 @@ class UpdateVendorService {
     const vendor = await vendorsRepository.findOne(id);
 
     if (!vendor) {
-      throw new AppError('Usuário não encontrado');
+      throw new AppError('vendedor não encontrado');
     }
 
     const vendorExists = await vendorsRepository.findByName(name);
 
-    if (vendorExists) {
-      throw new AppError('Já existe um usuário com esse nome.');
+    if (vendorExists && name !== vendor.name) {
+      throw new AppError('Já existe um vendedor com esse nome.');
     }
 
     vendor.name = name;

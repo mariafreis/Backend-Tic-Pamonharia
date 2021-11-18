@@ -1,23 +1,34 @@
-import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
+import { compare } from 'bcryptjs';
 
-interface IRequest {
-  id: string;
+interface ILogin {
+  email: string;
+  password: string;
 }
 
-class ListUserService {
-  public async execute({ id }: IRequest): Promise<User> {
+class ShowUserService {
+  public async execute({ email, password }: ILogin): Promise<String> {
     const usersRepository = getCustomRepository(UsersRepository);
-    const user = await usersRepository.findOne(id);
+    const user = await usersRepository.findByEmail(email);
 
-    if (!user) {
-      throw new AppError('Usuário não existe.');
+    if (user) {
+      // caso exista usuário com este email
+      // compara a senha informado com a senha do banco de dados
+      // função compare do bcrypts
+      const validPassword = await compare(password, user.password);
+      if (validPassword) {
+        // senha válida
+        return 'Usuário OK';
+      } else {
+        // senha inválida
+        return 'Usuário/Senha inválidos';
+      }
+    } else {
+      // usuário não encontrada
+      return 'Usuário/Senha inválidos';
     }
-
-    return user;
   }
 }
 
-export default ListUserService;
+export default ShowUserService;

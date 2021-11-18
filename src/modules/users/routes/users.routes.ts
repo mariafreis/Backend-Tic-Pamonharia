@@ -6,17 +6,11 @@ import isAuthenticated from '../middlewares/isAuthenticated';
 const usersRouter = Router();
 const usersController = new UsersController();
 
-usersRouter.get('/', isAuthenticated, usersController.index);
+// rota de login
+// método get, chama o showUserService passando 2 parâmetros
+usersRouter.get('/:email/:password', usersController.show);
 
-usersRouter.get(
-  '/:id',
-  celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().uuid().required(),
-    },
-  }),
-  usersController.show,
-);
+usersRouter.get('/', usersController.index);
 
 usersRouter.post(
   '/',

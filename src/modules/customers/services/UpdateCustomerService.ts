@@ -29,7 +29,7 @@ class UpdateCustomerService {
 
     const customerExists = await customersRepository.findByCPF(cpf);
 
-    if (customerExists) {
+    if (customerExists && cpf !== customer.cpf) {
       throw new AppError('Já existe um cliente com esse cpf.');
     }
     customer.name = name;

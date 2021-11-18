@@ -3,6 +3,7 @@ import CreateUserService from '../services/CreateUserService';
 import DeleteUserService from '../services/DeleteUserService';
 import ListUserService from '../services/ListUserService';
 import ShowUserService from '../services/ShowUserService';
+import UpdateUserService from '../services/UpdateUserService';
 
 export default class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -13,13 +14,17 @@ export default class UsersController {
     return response.json(users);
   }
 
+  // chama o ShowUserService
   public async show(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
-
-    const showUser = new ShowUserService();
-
-    const user = await showUser.execute({ id });
-    return response.json(user);
+    // recupera o email e a senha fornecidos pelo usuário
+    let email = request.params['email'];
+    let password = request.params['password'];
+    // cria um showUserService
+    let showUserService = new ShowUserService();
+    // executa o execute do showUserService
+    let resposta = await showUserService.execute({ email, password });
+    // retorna uma String
+    return response.json(resposta);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
@@ -40,10 +45,12 @@ export default class UsersController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { name, email, password, nickname, occupation } = request.body;
+    const { id } = request.params;
 
-    const updateUser = new CreateUserService();
+    const updateUser = new UpdateUserService();
 
     const user = await updateUser.execute({
+      id,
       name,
       email,
       password,

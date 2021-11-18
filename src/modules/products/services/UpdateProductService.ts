@@ -7,9 +7,9 @@ interface IRequest {
   id: string;
   name: string;
   description: string;
+  quantity: number;
   pricecomp: number;
   pricevend: number;
-  quantity: number;
 }
 
 class UpdateProductService {
@@ -17,9 +17,9 @@ class UpdateProductService {
     id,
     name,
     description,
+    quantity,
     pricecomp,
     pricevend,
-    quantity,
   }: IRequest): Promise<Product> {
     const productsRepository = getCustomRepository(ProductRepository);
 
@@ -31,15 +31,15 @@ class UpdateProductService {
 
     const productExists = await productsRepository.findByName(name);
 
-    if (productExists) {
+    if (productExists && name !== product.name) {
       throw new AppError('Já existe um produto com esse nome.');
     }
 
     product.name = name;
     product.description = description;
+    product.quantity = quantity;
     product.pricecomp = pricecomp;
     product.pricevend = pricevend;
-    product.quantity = quantity;
 
     await productsRepository.save(product);
 

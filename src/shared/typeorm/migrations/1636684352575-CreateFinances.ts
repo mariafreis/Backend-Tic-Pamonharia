@@ -1,15 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-/*  name,
-      cpf,
-      celular
-      area
-      */
-export class CreateVendors1632799456193 implements MigrationInterface {
+export class CreateFinances1636684352575 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'vendors',
+        name: 'finances',
         columns: [
           {
             name: 'id',
@@ -19,25 +14,25 @@ export class CreateVendors1632799456193 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'name',
+            name: 'descricao',
             type: 'varchar',
           },
           {
-            name: 'cellphone',
+            name: 'natureza',
             type: 'varchar',
-            isUnique: true,
           },
           {
-            name: 'area',
-            type: 'varchar',
+            name: 'valor',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'parcelas',
+            type: 'int',
           },
           {
             name: 'created_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
           },
@@ -47,6 +42,6 @@ export class CreateVendors1632799456193 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('vendors');
+    await queryRunner.dropTable('finances');
   }
 }

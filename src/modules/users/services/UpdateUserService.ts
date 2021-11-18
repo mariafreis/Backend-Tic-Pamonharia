@@ -1,4 +1,5 @@
 import AppError from '@shared/errors/AppError';
+import { genSalt, hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
 import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
@@ -27,24 +28,17 @@ class UpdateUserService {
 
     if (!user) {
       throw new AppError('Usuário não encontrado');
+    } else {
+      user.name = name;
+      user.email = email;
+      user.password = password;
+      user.nickname = nickname;
+      user.occupation = occupation;
+
+      await usersRepository.save(user);
+
+      return user;
     }
-
-    const userExists = await usersRepository.findByName(name);
-
-    if (userExists) {
-      throw new AppError('Já existe um usuário com esse nome.');
-    }
-
-    user.name = name;
-    user.email = email;
-    user.password = password;
-    user.nickname = nickname;
-    user.occupation = occupation;
-
-    await usersRepository.save(user);
-
-    return user;
   }
 }
-
 export default UpdateUserService;

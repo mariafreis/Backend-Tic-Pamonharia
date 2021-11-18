@@ -8,10 +8,10 @@ const productsController = new ProductsController();
 productsRouter.get('/', productsController.index);
 
 productsRouter.get(
-  '/:id',
+  '/:name',
   celebrate({
     [Segments.PARAMS]: {
-      id: Joi.string().uuid().required(),
+      name: Joi.string(),
     },
   }),
   productsController.show,
@@ -40,9 +40,9 @@ productsRouter.put(
     [Segments.BODY]: {
       name: Joi.string().required(),
       description: Joi.string().required(),
+      quantity: Joi.number().required(),
       pricecomp: Joi.number().precision(2),
       pricevend: Joi.number().precision(2),
-      quantity: Joi.number().required(),
     },
   }),
   productsController.update,
