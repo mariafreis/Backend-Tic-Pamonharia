@@ -5,26 +5,21 @@ import MessageRepository from '../typeorm/repositories/MessageRepository';
 
 interface IRequest {
   name: string;
-  message: string;
+  text: string;
 }
 
 class CreateMessageService {
-  public async execute({ name, message }: IRequest): Promise<Message> {
+  public async execute({ name, text }: IRequest): Promise<Message> {
     const messageRepository = getCustomRepository(MessageRepository);
-    const messageExists = await messageRepository.findByName(name);
 
-    if (messageExists) {
-      throw new AppError('Já existe um produto com esse nome');
-    }
-
-    const cmessage = messageRepository.create({
+    const message = messageRepository.create({
       name,
-      message,
+      text,
     });
 
-    await messageRepository.save(cmessage);
+    await messageRepository.save(message);
 
-    return cmessage;
+    return message;
   }
 }
 

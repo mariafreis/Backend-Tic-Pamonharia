@@ -10,12 +10,12 @@ class DeleteMessageService {
   public async execute({ id }: IRequest): Promise<void> {
     const messagesRepository = getCustomRepository(MessageRepository);
 
-    const dmessage = await messagesRepository.findOne(id);
+    const message = await messagesRepository.findOne(id);
 
-    if (!dmessage) {
+    if (!message) {
       throw new AppError('Mensagem não existe.');
     }
-    await messagesRepository.remove(dmessage);
+    await messagesRepository.remove(message);
   }
 }
 

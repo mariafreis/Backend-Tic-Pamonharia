@@ -6,25 +6,25 @@ import MessageRepository from '../typeorm/repositories/MessageRepository';
 interface IRequest {
   id: string;
   name: string;
-  message: string;
+  text: string;
 }
 
 class UpdateMessageService {
-  public async execute({ id, name, message }: IRequest): Promise<Message> {
+  public async execute({ id, name, text }: IRequest): Promise<Message> {
     const messagesRepository = getCustomRepository(MessageRepository);
 
-    const umessage = await messagesRepository.findOne(id);
+    const message = await messagesRepository.findOne(id);
 
-    if (!umessage) {
+    if (!message) {
       throw new AppError('Mensagem não encontrada');
     }
 
-    umessage.name = name;
-    umessage.message = message;
+    message.name = name;
+    message.text = text;
 
-    await messagesRepository.save(umessage);
+    await messagesRepository.save(message);
 
-    return umessage;
+    return message;
   }
 }
 

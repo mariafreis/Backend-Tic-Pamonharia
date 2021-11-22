@@ -15,7 +15,7 @@ class Message {
   name: string;
 
   @Column()
-  message: string;
+  text: string;
 
   @CreateDateColumn()
   created_at: Date;

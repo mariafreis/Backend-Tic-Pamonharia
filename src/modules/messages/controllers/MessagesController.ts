@@ -14,31 +14,31 @@ export default class MessagesController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, message } = request.body;
+    const { name, text } = request.body;
 
     const createMessage = new CreateMessageService();
 
-    const cmessage = await createMessage.execute({
+    const message = await createMessage.execute({
       name,
-      message,
+      text,
     });
 
-    return response.json(cmessage);
+    return response.json(message);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, message } = request.body;
+    const { name, text } = request.body;
     const { id } = request.params;
 
     const updateMessage = new UpdateMessageService();
 
-    const umessage = await updateMessage.execute({
+    const message = await updateMessage.execute({
       id,
       name,
-      message,
+      text,
     });
 
-    return response.json(umessage);
+    return response.json(message);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

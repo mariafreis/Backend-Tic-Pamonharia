@@ -12,7 +12,7 @@ messagesRouter.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      message: Joi.string().required(),
+      text: Joi.string().required(),
     },
   }),
   messagesController.create,
@@ -26,7 +26,7 @@ messagesRouter.put(
     },
     [Segments.BODY]: {
       name: Joi.string().required(),
-      message: Joi.string().required(),
+      text: Joi.string().required(),
     },
   }),
   messagesController.update,
