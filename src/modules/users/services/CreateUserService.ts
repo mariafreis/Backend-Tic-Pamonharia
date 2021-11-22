@@ -26,8 +26,7 @@ class CreateUserService {
       throw new AppError('Email já pertence à algum usuário');
     }
 
-    const salt = await genSalt(8);
-    let hashedPassword = await hash(password, salt);
+    const hashedPassword = await hash(password, 8);
 
     const user = usersRepository.create({
       name,

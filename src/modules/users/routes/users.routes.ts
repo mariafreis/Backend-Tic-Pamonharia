@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import UsersController from '../controllers/UsersController';
 import { celebrate, Joi, Segments } from 'celebrate';
-import isAuthenticated from '../middlewares/isAuthenticated';
 
 const usersRouter = Router();
 const usersController = new UsersController();
@@ -17,7 +16,7 @@ usersRouter.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      email: Joi.string().email().required(),
+      email: Joi.string().required(),
       password: Joi.string().required(),
       nickname: Joi.string().required(),
       occupation: Joi.string().required(),
@@ -33,11 +32,12 @@ usersRouter.put(
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      name: Joi.string().required(),
-      email: Joi.string().required(),
-      password: Joi.string().required(),
-      nickname: Joi.string().required(),
-      occupation: Joi.string().required(),
+      name: Joi.string(),
+      email: Joi.string(),
+      old_password: Joi.string(),
+      password: Joi.string(),
+      nickname: Joi.string(),
+      occupation: Joi.string(),
     },
   }),
   usersController.update,

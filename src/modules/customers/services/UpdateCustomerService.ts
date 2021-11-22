@@ -27,11 +27,6 @@ class UpdateCustomerService {
       throw new AppError('Cliente não encontrado');
     }
 
-    const customerExists = await customersRepository.findByCPF(cpf);
-
-    if (customerExists && cpf !== customer.cpf) {
-      throw new AppError('Já existe um cliente com esse cpf.');
-    }
     customer.name = name;
     customer.cpf = cpf;
     customer.celular = celular;
