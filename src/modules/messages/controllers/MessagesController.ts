@@ -12,6 +12,7 @@ export default class MessagesController {
 
     return response.json(messages);
   }
+  //teste
 
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, text } = request.body;
